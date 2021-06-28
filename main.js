@@ -6,27 +6,33 @@ const port = 3000;
 const app = express();
 app.use(express.json());
 
-app.get('/:uid', (req, res) => {
-  var toDoLTem = req.params.uid;
-  res.status(200).json(toDoLTem);
+app.get('/?key=uid', (req, res) => {
+    const toDoID = req.query["key"];
+    const chickData = toDoID;
+    const toDoItem = chickData;
+    res.status(200).json(toDoItem);
 });
 
 app.post('/', (req, res) => {
-    var toDoLtem = req.body;
-    res.status(201).json("new todo_list create, ID {id:id}");
+    const toDoItem = req.body;
+    const saveData = toDoItem;
+    const toDoID = 15;
+    res.status(201).json({toDoID : toDoID});
 })
 
-app.delete('/:uid', (req,res) => {
-    var deleteId = req.params.uid;
-    res.status(200).json("delete todo_list success");
+app.delete('/?key=uid', (req, res) => {
+    const deleteID = req.query["key"];
+    const dataID = deleteID;
+    
+    res.status(200).send("delete todo_list success");
 })
 
-app.patch('/:uid', (req,res) => {
-    var updateId = req.params.uid;
-    var updateContent = req.body;
-    res.status(200).json("upadat content success");
+app.patch('/?key=uid', (req, res) => {
+    const updateId = req.query["key"];
+    const updateContent = req.body;
+    res.status(200).send("upadat content success");
 })
 
 app.listen(port, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+    console.log(`Server running at http://${hostname}:${port}/`);
 });
